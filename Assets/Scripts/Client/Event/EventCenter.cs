@@ -9,6 +9,7 @@ namespace Client.Event
     public class EventCenter : MonoBehaviour
     {
         #region 单例
+
         private static readonly object Lock = new();
         private static EventCenter _instance;
 
