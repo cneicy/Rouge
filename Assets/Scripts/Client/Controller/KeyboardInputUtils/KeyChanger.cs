@@ -19,7 +19,7 @@ namespace Client.Controller.KeyboardInputUtils
         [SerializeField] private TMP_Text up;
         public bool isDownChanging;
         [SerializeField] private TMP_Text down;
-        
+
         private void Start()
         {
             _keySettingManager = GameObject.FindWithTag("KeySettingManager").GetComponent<KeySettingManager>();
@@ -34,6 +34,7 @@ namespace Client.Controller.KeyboardInputUtils
         {
             isAttackChanging = true;
         }
+
         public void Attack()
         {
             if (isAttackChanging)
@@ -41,7 +42,7 @@ namespace Client.Controller.KeyboardInputUtils
                 if (Input.anyKeyDown)
                 {
                     isAttackChanging = false;
-                    KeyCode pressedKeyCode=KeyCode.None;
+                    KeyCode pressedKeyCode = KeyCode.None;
                     foreach (KeyCode keyCode in System.Enum.GetValues(typeof(KeyCode)))
                     {
                         if (!Input.GetKeyDown(keyCode)) continue;
@@ -59,6 +60,7 @@ namespace Client.Controller.KeyboardInputUtils
         {
             isLeftChanging = true;
         }
+
         public void Left()
         {
             if (isLeftChanging)
@@ -66,7 +68,7 @@ namespace Client.Controller.KeyboardInputUtils
                 if (Input.anyKeyDown)
                 {
                     isLeftChanging = false;
-                    KeyCode pressedKeyCode=KeyCode.None;
+                    KeyCode pressedKeyCode = KeyCode.None;
                     foreach (KeyCode keyCode in System.Enum.GetValues(typeof(KeyCode)))
                     {
                         if (!Input.GetKeyDown(keyCode)) continue;
@@ -79,11 +81,12 @@ namespace Client.Controller.KeyboardInputUtils
                 }
             }
         }
-        
+
         public void EnableRightChange()
         {
             isRightChanging = true;
         }
+
         public void Right()
         {
             if (isRightChanging)
@@ -91,7 +94,7 @@ namespace Client.Controller.KeyboardInputUtils
                 if (Input.anyKeyDown)
                 {
                     isRightChanging = false;
-                    KeyCode pressedKeyCode=KeyCode.None;
+                    KeyCode pressedKeyCode = KeyCode.None;
                     foreach (KeyCode keyCode in System.Enum.GetValues(typeof(KeyCode)))
                     {
                         if (!Input.GetKeyDown(keyCode)) continue;
@@ -104,12 +107,13 @@ namespace Client.Controller.KeyboardInputUtils
                 }
             }
         }
-        
-        
+
+
         public void EnablUpChange()
         {
             isUpChanging = true;
         }
+
         public void Up()
         {
             if (isUpChanging)
@@ -117,7 +121,7 @@ namespace Client.Controller.KeyboardInputUtils
                 if (Input.anyKeyDown)
                 {
                     isUpChanging = false;
-                    KeyCode pressedKeyCode=KeyCode.None;
+                    KeyCode pressedKeyCode = KeyCode.None;
                     foreach (KeyCode keyCode in System.Enum.GetValues(typeof(KeyCode)))
                     {
                         if (!Input.GetKeyDown(keyCode)) continue;
@@ -130,11 +134,12 @@ namespace Client.Controller.KeyboardInputUtils
                 }
             }
         }
-        
+
         public void EnablDownChange()
         {
             isDownChanging = true;
         }
+
         public void Down()
         {
             if (isDownChanging)
@@ -142,7 +147,7 @@ namespace Client.Controller.KeyboardInputUtils
                 if (Input.anyKeyDown)
                 {
                     isDownChanging = false;
-                    KeyCode pressedKeyCode=KeyCode.None;
+                    KeyCode pressedKeyCode = KeyCode.None;
                     foreach (KeyCode keyCode in System.Enum.GetValues(typeof(KeyCode)))
                     {
                         if (!Input.GetKeyDown(keyCode)) continue;

@@ -7,6 +7,7 @@ namespace Client.Controller
     {
         private Camera _camera;
         private Vector3 _playerPositionTemp;
+
         private void Start()
         {
             _camera = Camera.main;
@@ -20,7 +21,6 @@ namespace Client.Controller
                 _playerPositionTemp.z = -10;
                 _camera.transform.position = _playerPositionTemp;
             }
-            
         }
     }
 }

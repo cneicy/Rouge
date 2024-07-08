@@ -12,7 +12,7 @@ namespace Client.Controller.KeyboardInputUtils
         public string filePath;
 
         private static KeySettingManager _instance;
-        
+
         public static KeySettingManager Instance
         {
             get
@@ -39,6 +39,7 @@ namespace Client.Controller.KeyboardInputUtils
             {
                 _instance = this;
             }
+
             DontDestroyOnLoad(gameObject);
             filePath = Application.persistentDataPath + "/" + "KeySetting.json";
             LoadKeySettings();
@@ -89,7 +90,7 @@ namespace Client.Controller.KeyboardInputUtils
 
             SaveKeySettings();
         }
-        
+
         //更新Direction
         private void Update()
         {
@@ -122,12 +123,12 @@ namespace Client.Controller.KeyboardInputUtils
             {
                 Direction = new Vector2(0, Direction.y);
             }
-            
+
             if (Input.GetKey(GetKey("Up")) && Input.GetKey(GetKey("Down")))
             {
                 Direction = new Vector2(Direction.x, 0);
             }
-            
+
             if (!Input.GetKey(GetKey("Up")) && !Input.GetKey(GetKey("Down")))
             {
                 Direction = new Vector2(Direction.x, 0);

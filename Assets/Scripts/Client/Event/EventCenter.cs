@@ -38,26 +38,22 @@ namespace Client.Event
                 _instance = this;
             }
         }
+
         #endregion
+
         //定义事件
         public event PlayerHpChangeEventHandler OnPlayerHpChange;
         public event Action<ulong> OnPlayerDie;
         public event TouchPlayerEventHandler OnTouchPlayer;
 
         //玩家HP变化 血量归零时执行PlayerDie，触发OnPlayerDie
-        public int PlayerHpChange(int hp, ulong playerID)
+        public int? PlayerHpChange(int damage, ulong playerID)
         {
-            if (OnPlayerHpChange == null) return hp;
-            var newHp = OnPlayerHpChange(new PlayerHpChangeEventArgs(hp, playerID));
-            if (newHp <= 0) PlayerDie(playerID);
+            Debug.Log(playerID);
+            var newHp = OnPlayerHpChange?.Invoke(new PlayerHpChangeEventArgs(damage, playerID));
             return newHp;
         }
-
-        //玩家死亡
-        private void PlayerDie(ulong playerID)
-        {
-            OnPlayerDie?.Invoke(playerID);
-        }
+        
 
         //触摸玩家
         public Player TouchPlayer(Player player, ulong playerID)

@@ -21,10 +21,6 @@ namespace Client.Controller
             {
                 _rigidbody.velocity = KeySettingManager.Instance.Direction.normalized * 10;
             }
-            else
-            {
-                // Code for non-local player here
-            }
         }
     }
 }

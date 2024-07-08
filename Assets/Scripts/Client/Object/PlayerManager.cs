@@ -6,10 +6,11 @@ namespace Client.Object
 {
     public class PlayerManager : MonoBehaviour
     {
-
         #region 单例
+
         private static readonly object Lock = new();
         private static PlayerManager _instance;
+
         public static PlayerManager Instance
         {
             get
@@ -23,6 +24,7 @@ namespace Client.Object
                 }
             }
         }
+
         private void Awake()
         {
             if (_instance is not null && _instance != this)
@@ -36,15 +38,13 @@ namespace Client.Object
 
             StartCoroutine(AccessOnlinePlayer());
         }
+
         #endregion
+
         public List<Player> PlayerList;
 
-        public GameObject LocalPlayer
-        {
-            get;
-            private set;
-        }
-        
+        public GameObject LocalPlayer { get; private set; }
+
         //获取所有在线玩家，并标记本地玩家
         private IEnumerator AccessOnlinePlayer()
         {
@@ -56,6 +56,7 @@ namespace Client.Object
                 {
                     LocalPlayer = player;
                 }
+
                 ptemp.Add(player.GetComponent<Player>());
             }
 
