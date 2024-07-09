@@ -1,5 +1,4 @@
-﻿using System;
-using Client.Data;
+﻿using Client.Data;
 using Unity.Netcode;
 using UnityEngine;
 

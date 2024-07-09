@@ -54,7 +54,6 @@ namespace Client.Object
         //OnPlayerHpChange触发后执行HandlePlayerHpChange
         private int HandlePlayerHpChange(PlayerHpChangeEventArgs e)
         {
-            Debug.Log("Handle"+e.PlayerID);
             if (e.PlayerID != playerID) return 114514;//大于0即可
             if (hp <= 1)
             {
