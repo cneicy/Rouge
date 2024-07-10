@@ -5,16 +5,16 @@ using UnityEngine;
 public class Handle : MonoBehaviour
 {
     public GameObject enemy;
+    public GameObject @base;
     public ClientData clientData;
 
     public void CreateEnemy()
     {
-        var temp = Instantiate(enemy);
-        temp.GetComponent<NetworkObject>().Spawn();
+        Instantiate(enemy).GetComponent<NetworkObject>().Spawn();
     }
 
-    private void Start()
+    public void CreateBase()
     {
-        
+        Instantiate(@base).GetComponent<NetworkObject>().Spawn();
     }
 }

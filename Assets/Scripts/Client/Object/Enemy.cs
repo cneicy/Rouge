@@ -7,28 +7,26 @@ namespace Client.Object
 {
     public class Enemy : NetworkBehaviour
     {
-        public Transform targetPoint;  // 目标点的Transform组件
-        public float moveSpeed = 5f;   // 移动速度
+        public Transform targetPoint;
+        public float moveSpeed = 5f;
+        public int hp;
         private void OnEnable()
         {
             EventCenter.Instance.OnTouchPlayer += HandleTouchPlayer;
+            EventCenter.Instance.OnTouchBase += HandleTouchBase;
         }
 
         private void OnDisable()
         {
             EventCenter.Instance.OnTouchPlayer -= HandleTouchPlayer;
+            EventCenter.Instance.OnTouchBase -= HandleTouchBase;
         }
-
         
-
         private void Update()
         {
-            if (targetPoint != null)
+            if (targetPoint is not null)
             {
-                //算敌人朝向目标点的方向向量
-                //var direction = (targetPoint.position - transform.position).normalized;
-                var direction = (Vector3.zero - transform.position).normalized;
-                //移动敌人
+                var direction = (targetPoint.position - transform.position).normalized;
                 transform.Translate(direction * (moveSpeed * Time.deltaTime));
             }
         }
@@ -53,6 +51,11 @@ namespace Client.Object
         {
             EventCenter.Instance.PlayerHpChange(-damage, e.PlayerID);
             return e.Player;
+        }
+        private Base HandleTouchBase(TouchBaseEventArgs e)
+        {
+            EventCenter.Instance.BaseHpChange(-damage, e.Base);
+            return e.Base;
         }
     }
 }

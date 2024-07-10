@@ -57,18 +57,21 @@ namespace Client.Object
             if (e.PlayerID != playerID) return 114514;//大于0即可
             if (hp <= 1)
             {
-                HandlePlayerDie(e.PlayerID);
+                EventCenter.Instance.PlayerDie(e.PlayerID);
             }
             return hp += e.Damage;
         }
 
         //OnPlayerDie触发后执行HandlePlayerDie
-        private void HandlePlayerDie(ulong playerIDArg)
+        private ulong HandlePlayerDie(PlayerDieEventArgs e)
         {
-            if (playerIDArg == playerID)
+            if (e.PlayerID == playerID)
             {
-                Debug.Log("HandlePlayerDie " + playerIDArg);
+                Debug.Log("HandlePlayerDie " + e.PlayerID);
+                return e.PlayerID;
             }
+
+            return 114514;
         }
 
         public int GetPlayerHp()

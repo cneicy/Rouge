@@ -20,7 +20,7 @@ namespace Client.Controller.KeyboardInputUtils
                 if (_instance) return _instance;
                 _instance = FindObjectOfType<KeySettingManager>();
                 if (_instance) return _instance;
-                var go = new GameObject("KeySettingManager");
+                var go = new GameObject(nameof(KeySettingManager));
                 _instance = go.AddComponent<KeySettingManager>();
 
                 return _instance;

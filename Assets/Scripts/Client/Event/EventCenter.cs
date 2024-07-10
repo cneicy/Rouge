@@ -44,10 +44,12 @@ namespace Client.Event
         //定义事件
         //todo enemydie event
         public event PlayerHpChangeEventHandler OnPlayerHpChange;
-        public event Action<ulong> OnPlayerDie;
+        public event PlayerDieEventHandler OnPlayerDie;
         public event TouchPlayerEventHandler OnTouchPlayer;
         public event TouchBaseEventHandler OnTouchBase;
         public event BaseHpChangeEventHandler OnBaseHpChange;
+
+        public event BaseRuinedEventHandler OnBaseRuined;
 
         //玩家HP变化 血量归零时执行PlayerDie，触发OnPlayerDie
         public int? PlayerHpChange(int damage, ulong playerID)
@@ -57,15 +59,25 @@ namespace Client.Event
             return newHp;
         }
 
-        public int? BaseHpChange(int damage)
+        public int? BaseHpChange(int damage, Base @base)
         {
-            var newHp = OnBaseHpChange?.Invoke(new BaseHpChangeEventArgs(damage));
+            var newHp = OnBaseHpChange?.Invoke(new BaseHpChangeEventArgs(damage,@base));
             return newHp;
         }
 
+        public ulong? PlayerDie(ulong playerID)
+        {
+            var temp = OnPlayerDie?.Invoke(new PlayerDieEventArgs(playerID));
+            return temp;
+        }
         public Base TouchBase(Base @base)
         {
             return OnTouchBase?.Invoke(new TouchBaseEventArgs(@base));
+        }
+
+        public Base BaseRuined(Base @base)
+        {
+            return OnBaseRuined?.Invoke(new BaseRuinedEventArgs(@base));
         }
         //触摸玩家
         public Player TouchPlayer(Player player, ulong playerID)

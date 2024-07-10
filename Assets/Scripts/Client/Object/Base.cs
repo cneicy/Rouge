@@ -10,19 +10,29 @@ namespace Client.Object
         private void OnEnable()
         {
             EventCenter.Instance.OnBaseHpChange += HandleBaseHpChange;
+            EventCenter.Instance.OnBaseRuined += HandleBaseRuined;
         }
+
+        private void OnDisable()
+        {
+            EventCenter.Instance.OnBaseHpChange -= HandleBaseHpChange;
+            EventCenter.Instance.OnBaseRuined -= HandleBaseRuined;
+        }
+        
+
         private int HandleBaseHpChange(BaseHpChangeEventArgs e)
         {
             if (hp <= 1)
             {
-                HandleBaseDie();
+                EventCenter.Instance.BaseRuined(e.Base);
             }
             return hp += e.Damage;
         }
 
-        private void HandleBaseDie()
+        private Base HandleBaseRuined(BaseRuinedEventArgs e)
         {
             Debug.Log("Base ruin");
+            return e.Base;
         }
     }
 }
