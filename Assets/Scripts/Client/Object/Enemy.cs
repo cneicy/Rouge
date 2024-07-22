@@ -1,5 +1,6 @@
 ﻿using Client.Event;
 using Client.Event.EventArgs;
+using Client.Object.Pool;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace Client.Object
         public Transform targetPoint;
         public float moveSpeed = 5f;
         public int hp;
+        public bool isBoss;
         private void OnEnable()
         {
             EventCenter.Instance.OnTouchPlayer += HandleTouchPlayer;
@@ -55,6 +57,10 @@ namespace Client.Object
         private Base HandleTouchBase(TouchBaseEventArgs e)
         {
             EventCenter.Instance.BaseHpChange(-damage, e.Base);
+            if (!isBoss)
+            {
+                EnemyPool.Instance.Release(this);
+            }
             return e.Base;
         }
     }
