@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using Client.Object.Pool;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Client.Object
 {
-    public class EnemySpawner : MonoBehaviour
+    public class EnemySpawner : NetworkBehaviour
     {
         public GameObject enemyPrefab;
         public int initialPoolSize = 5;
@@ -16,9 +17,14 @@ namespace Client.Object
         private void Start()
         {
             SingletonObjectPool<Enemy>.Instance.Init(enemyPrefab.GetComponent<Enemy>(), initialPoolSize, maxPoolSize);
-            StartCoroutine(SpawnEnemiesCoroutine());
+            NetworkManager.Singleton.OnServerStarted += ServerStarted;
+
         }
 
+        private void ServerStarted()
+        {
+            StartCoroutine(SpawnEnemiesCoroutine());
+        }
         private IEnumerator SpawnEnemiesCoroutine()
         {
             while (true)

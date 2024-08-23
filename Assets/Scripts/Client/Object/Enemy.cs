@@ -26,7 +26,7 @@ namespace Client.Object
         
         private void Update()
         {
-            if (targetPoint is not null)
+            if (targetPoint)
             {
                 var direction = (targetPoint.position - transform.position).normalized;
                 transform.Translate(direction * (moveSpeed * Time.deltaTime));
